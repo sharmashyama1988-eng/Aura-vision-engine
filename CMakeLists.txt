@@ -7,31 +7,33 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Include Directories
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-# Source Files
+# Base Source Files
 set(SOURCES
-    src/main.cpp
     src/Core/TaskScheduler.cpp
     src/Core/PoolAllocator.cpp
     src/Renderer/VisualEngine.cpp
 )
 
-# Header Files (for IDE visibility)
-set(HEADERS
-    include/Aura/Core/Base.hpp
-    include/Aura/Core/TaskScheduler.hpp
-    include/Aura/Math/Vector3.hpp
-    include/Aura/Math/Matrix4.hpp
-    include/Aura/Camera/Camera.hpp
-    include/Aura/Renderer/VisualEngine.hpp
-    include/Aura/Vision/ImageProcessor.hpp
-)
-
-# Executable
-add_executable(AuraEngine ${SOURCES} ${HEADERS})
-
-# Optimization flags for "Heavy" performance
-if(MSVC)
-    target_compile_options(AuraEngine PRIVATE /W4 /O2 /Oi /Ot /GL)
+# Platform Specific Logic
+if(ANDROID)
+    # Add JNI Bridge for Android
+    list(APPEND SOURCES android/app/src/main/cpp/native-lib.cpp)
+    add_library(aura_engine SHARED ${SOURCES})
+    target_link_libraries(aura_engine log) # Link Android logging
 else()
-    target_compile_options(AuraEngine PRIVATE -Wall -Wextra -O3)
+    # Desktop Executable
+    list(APPEND SOURCES src/main.cpp)
+    add_executable(AuraEngine ${SOURCES})
+endif()
+
+# Optimization flags
+if(MSVC)
+    target_compile_options(${PROJECT_NAME} PRIVATE /W4 /O2 /Oi /Ot /GL)
+else()
+    # Using PROJECT_NAME to target either the library or the executable
+    if(ANDROID)
+        target_compile_options(aura_engine PRIVATE -Wall -Wextra -O3)
+    else()
+        target_compile_options(AuraEngine PRIVATE -Wall -Wextra -O3)
+    endif()
 endif()
