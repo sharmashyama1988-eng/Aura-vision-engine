@@ -1,0 +1,11 @@
+package com.aura.vision;
+
+public class AuraEngine {
+    static {
+        System.loadLibrary("aura_engine");
+    }
+
+    public static native void init();
+    public static native void processFrame(long framePointer);
+    public static native void shutdown();
+}
