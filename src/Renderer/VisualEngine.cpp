@@ -14,6 +14,8 @@ namespace aura::renderer {
     }
 
     void VisualEngine::Initialize() {
+        aura::SignalHandler::Setup();
+        std::cout << "[Aura] Signal Handler initialized for zero-crash stability." << std::endl;
         std::cout << "[Aura] Initializing Visual Engine v" << VERSION_MAJOR << "." << VERSION_MINOR << std::endl;
         std::cout << "[Aura] Initializing GPU Compute Context..." << std::endl;
         // In a real mobile app, we'd initialize Vulkan or Metal here.
