@@ -19,7 +19,7 @@ jobs:
       - name: Configure CMake
         run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{matrix.build_type}}
       - name: Build
-        run: cmake --build ${{github.workspace}}/build --config ${{matrix.build_type}}
+        run: cmake --build ${{github.workspace}}/build --config ${{matrix.build_type}} -j $(nproc)
 
   build-android:
     name: Build Android APK
@@ -32,6 +32,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+          cache: 'gradle'
 
       - name: Setup Android NDK
         uses: nttld/setup-ndk@v1
@@ -45,7 +46,7 @@ jobs:
 
       - name: Build with Gradle
         run: |
-          cd android && gradle assembleRelease
+          cd android && gradle assembleRelease --parallel --max-workers 4
 
       - name: Upload APK
         uses: actions/upload-artifact@v4

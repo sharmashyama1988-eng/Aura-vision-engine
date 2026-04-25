@@ -4,6 +4,8 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <csignal>
+#include <iostream>
 
 namespace aura {
 
@@ -35,8 +37,6 @@ namespace aura {
     using Scope = std::unique_ptr<T>;
 
     // --- Zero-Crash Stability Layer ---
-    #include <csignal>
-    #include <iostream>
 
     class SignalHandler {
     public:
