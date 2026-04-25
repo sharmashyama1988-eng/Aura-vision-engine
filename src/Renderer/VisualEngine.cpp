@@ -43,13 +43,14 @@ namespace aura::renderer {
         // Here we would pass the frame to the Vision module
 
         auto end = std::chrono::high_resolution_clock::now();
-        std::chrono::duration<double, std::milli> elapsed = end - start;
+        [[maybe_unused]] std::chrono::duration<double, std::milli> elapsed = end - start;
 
         // Logging frame stats (In production, this would be on-screen)
         // std::cout << "[Aura] Frame processed in " << elapsed.count() << "ms" << std::endl;
     }
 
     void VisualEngine::Update(float dt) {
+        (void)dt;
         // Update animations, camera jitter correction, etc.
     }
 

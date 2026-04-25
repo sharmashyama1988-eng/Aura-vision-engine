@@ -37,7 +37,7 @@ namespace aura::renderer {
         math::Matrix4 m_ViewMatrix;
 
         // Internal GPU Context (Vulkan/Metal handles would go here)
-        void* m_GPUContext = nullptr;
+        // void* m_GPUContext = nullptr;
 
         void ApplyToneMapping();
         void ApplyTemporalAntiAliasing();

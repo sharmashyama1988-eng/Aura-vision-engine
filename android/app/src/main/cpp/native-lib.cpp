@@ -12,6 +12,7 @@ static aura::Scope<aura::renderer::VisualEngine> g_Engine;
 
 extern "C" JNIEXPORT void JNICALL
 Java_com_aura_vision_AuraEngine_init(JNIEnv* env, jobject /* this */) {
+    (void)env;
     try {
         g_Engine = aura::CreateScope<aura::renderer::VisualEngine>();
         g_Engine->Initialize();
@@ -23,6 +24,8 @@ Java_com_aura_vision_AuraEngine_init(JNIEnv* env, jobject /* this */) {
 
 extern "C" JNIEXPORT void JNICALL
 Java_com_aura_vision_AuraEngine_processFrame(JNIEnv* env, jobject /* this */, jlong framePointer) {
+    (void)env;
+    (void)framePointer;
     // In a production app, we pass the pointer to the raw camera buffer
     // For now, we simulate processing to ensure stability
     if (g_Engine) {
@@ -32,6 +35,7 @@ Java_com_aura_vision_AuraEngine_processFrame(JNIEnv* env, jobject /* this */, jl
 
 extern "C" JNIEXPORT void JNICALL
 Java_com_aura_vision_AuraEngine_shutdown(JNIEnv* env, jobject /* this */) {
+    (void)env;
     if (g_Engine) {
         g_Engine->Shutdown();
         g_Engine.reset();
