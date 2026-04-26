@@ -23,6 +23,15 @@ namespace aura::vision {
         void ProcessVisualStreams();
 
     private:
+        void ApplyBilateralFilter(const camera::Frame& input, camera::Frame& output);
+        void OptimizeLocalContrast(camera::Frame& frame);
+        void InjectHighFrequencyDetails(camera::Frame& frame);
+        
+        void LinearizeColorSpace(const camera::Frame& frame);
+        void Apply3DLUT(camera::Frame& frame);
+        void BalanceVibrance(camera::Frame& frame);
+        void ApplyGammaCorrection(camera::Frame& frame, float gamma);
+
         // Internal state for GPU acceleration/NPU kernels
         void* m_InternalContext;
     };
