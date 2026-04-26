@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Aura Vision</string>
+    <string name="accessibility_description">Optimizes camera performance and provides vision enhancements automatically.</string>
 </resources>

@@ -7,20 +7,6 @@ on:
     branches: [ main, master ]
 
 jobs:
-  build-desktop:
-    name: Build on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [windows-latest, ubuntu-latest]
-        build_type: [Release]
-    steps:
-      - uses: actions/checkout@v4
-      - name: Configure CMake
-        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{matrix.build_type}}
-      - name: Build
-        run: cmake --build ${{github.workspace}}/build --config ${{matrix.build_type}} -j $(nproc)
-
   build-android:
     name: Build Android APK
     runs-on: ubuntu-latest

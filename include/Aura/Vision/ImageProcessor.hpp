@@ -26,6 +26,20 @@ namespace aura::vision {
 
         // Integrate with Neural Network (NPU)
         static void RunInference(const camera::Frame& frame, std::vector<DetectionResult>& outResults);
+
+        // --- NEW ENGINES ---
+        
+        // Motion Detection Engine
+        static bool DetectMotion(const camera::Frame& current, const camera::Frame& previous);
+
+        // Object Tracking Engine
+        static void TrackObject(const camera::Frame& frame, const DetectionResult& target, float outPos[2]);
+
+        // Facial Recognition Engine
+        static void RecognizeFace(const camera::Frame& frame, std::vector<std::string>& outNames);
+
+        // OCR Engine (Optical Character Recognition)
+        static void ExtractText(const camera::Frame& frame, std::string& outText);
     };
 
 } // namespace aura::vision

@@ -12,6 +12,7 @@ set(SOURCES
     src/Core/TaskScheduler.cpp
     src/Core/PoolAllocator.cpp
     src/Renderer/VisualEngine.cpp
+    src/Vision/ImageProcessor.cpp
 )
 
 # Platform Specific Logic
