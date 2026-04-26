@@ -20,13 +20,6 @@ namespace aura::core {
      * @brief THERMAL THROTTLING POLICIES
      * Defines at what temperature specific engines should be disabled.
      */
-    struct ThermalPolicy {
-        float threshold;
-        bool disableProVisual;
-        bool disableAI;
-        int cpuFreqLimit;
-    };
-
     static const ThermalPolicy POLICIES[4] = {
         { 35.0f, false, false, 0 },    // NORMAL
         { 42.0f, true,  false, 80 },   // WARM
